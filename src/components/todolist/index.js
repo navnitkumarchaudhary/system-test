@@ -103,13 +103,12 @@ const TodoList = ({ todos, deleteTodo, reOpenTodo, markDone, setFormToEdit, clea
 
   const handleTableRowClick = (e, postId) => {
     e.stopPropagation();
-    if (!e.target.matches("input.PrivateSwitchBase-input-38")) {
+    if (!e.target.matches("input.PrivateSwitchBase-input-38") && !e.target.matches("input.jss38")) {
       openDescriptionModal(postId);
     }
 
   };
   const handleCheckChange = (e) => {
-    console.log(e);
     const item = e.target.name;
     const isChecked = e.target.checked;
     updateChecboxValue(item, isChecked)

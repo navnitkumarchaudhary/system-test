@@ -173,7 +173,6 @@ export const markBulkPending = payload => {
 
 
 export const updateChecboxValue = (id, ischecked) => {
-    console.log(id, ischecked);
     return (dispatch, getState) => {
         const { isFetching } = getState();
         if (!isFetching) {
