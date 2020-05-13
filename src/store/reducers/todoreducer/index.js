@@ -1,5 +1,5 @@
 import dummyData from "../../../Mockdata";
-import { ADD_TODO, DELETE_TODO, RE_OPEN, MARK_DONE, EDIT_TODO, GLOBAL_SEARCH, BULK_DONE, BULK_PENDING } from "../../actions";
+import { ADD_TODO, DELETE_TODO, RE_OPEN, MARK_DONE, EDIT_TODO, GLOBAL_SEARCH, BULK_DONE, BULK_PENDING, UPDATE_CHECKBOX } from "../../actions";
 
 const initialState = dummyData;
 
@@ -53,16 +53,23 @@ const TodoReducer = (state = { todos: initialState, alltodos: initialState }, ac
             ids = action.payload.map(x => x);
             return {
                 ...state,
-                todos: state.todos.map(x => { return ids.includes(x.id) ? { ...x, currentState: true } : { ...x } }),
-                alltodos: state.alltodos.map(x => { return ids.includes(x.id) ? { ...x, currentState: true } : { ...x } })
+                todos: state.todos.map(x => { return ids.includes(x.id) ? { ...x, currentState: true, checked:false } : { ...x } }),
+                alltodos: state.alltodos.map(x => { return ids.includes(x.id) ? { ...x, currentState: true, checked:false } : { ...x } })
             }
 
         case BULK_PENDING:
             ids = action.payload.map(x => x);
             return {
                 ...state,
-                todos: state.todos.map(x => { return ids.includes(x.id) ? { ...x, currentState: false } : { ...x } }),
-                alltodos: state.alltodos.map(x => { return ids.includes(x.id) ? { ...x, currentState: false } : { ...x } }),
+                todos: state.todos.map(x => { return ids.includes(x.id) ? { ...x, currentState: false, checked:false } : { ...x } }),
+                alltodos: state.alltodos.map(x => { return ids.includes(x.id) ? { ...x, currentState: false, checked:false } : { ...x } }),
+            }
+
+        case UPDATE_CHECKBOX:
+            return {
+                ...state,
+                todos: state.todos.map(x => { return action.payload.id === x.id ? { ...x, checked: action.payload.ischecked } : { ...x } }),
+                alltodos: state.alltodos.map(x => { return action.payload.id === x.id ? { ...x, checked: action.payload.ischecked  } : { ...x } }),
             }
 
         default:

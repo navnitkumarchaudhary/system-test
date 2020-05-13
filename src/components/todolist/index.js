@@ -5,16 +5,15 @@ import TodoForm from "../todoform";
 import Modal from "../modal";
 import TodoListRow from "../todolistrow";
 import { getSelectedRowsIds } from "../../utils";
-import { deleteTodo, reOpenTodo, markDone, editTodo, setFormToEdit, clearFormToEdit, markBulkDone, markBulkPending } from "../../store/actions";
+import { deleteTodo, reOpenTodo, markDone, editTodo, setFormToEdit, clearFormToEdit, markBulkDone, markBulkPending, updateChecboxValue } from "../../store/actions";
 
 
-const TodoList = ({ todos, deleteTodo, reOpenTodo, markDone, setFormToEdit, clearFormToEdit, editTodo, markBulkDone, markBulkPending }) => {
+const TodoList = ({ todos, deleteTodo, reOpenTodo, markDone, setFormToEdit, clearFormToEdit, editTodo, markBulkDone, markBulkPending, updateChecboxValue }) => {
   const [editModalIsOpen, setEditModalIsOpen] = useState(false);
   const [deleteModalIsOpen, setDeleteModalIsOpen] = useState(false);
   const [deleteItem, setDeleteItem] = useState([]);
   const [isOpenDescriptionModal, setIsOpenDescriptionModal] = useState(false);
   const [modalContent, setModalContent] = useState("");
-  const [checkedItems, setCheckedItems] = useState(new Map());
 
   useEffect(() => {
     document.onkeyup = function (e) {
@@ -32,18 +31,18 @@ const TodoList = ({ todos, deleteTodo, reOpenTodo, markDone, setFormToEdit, clea
   )
 
   const handleBulkDelete = () => {
-    let ids = getSelectedRowsIds(checkedItems);
+    let ids = getSelectedRowsIds(todos);
     setDeleteModalIsOpen(true);
     setDeleteItem(ids);
   };
 
   const handleBulkDone = () => {
-    let ids = getSelectedRowsIds(checkedItems);
+    let ids = getSelectedRowsIds(todos);
     markBulkDone(ids);
   };
 
   const handleBulkPending = () => {
-    let ids = getSelectedRowsIds(checkedItems);
+    let ids = getSelectedRowsIds(todos);
     markBulkPending(ids);
   }
 
@@ -95,7 +94,7 @@ const TodoList = ({ todos, deleteTodo, reOpenTodo, markDone, setFormToEdit, clea
         <p>Created At: {item.createdAt}</p>
         <p>Due Date: {item.dueDate}</p>
         <p>Priority: {item.priority}</p>
-        <p>Current State: {item.currentState === true ? "Done" : "Open"}</p>
+        <p>Current Status: {item.currentState === true ? "Completed" : "Pending"}</p>
       </div>
     );
     setModalContent(renderDescription);
@@ -112,14 +111,13 @@ const TodoList = ({ todos, deleteTodo, reOpenTodo, markDone, setFormToEdit, clea
   const handleCheckChange = (e) => {
     const item = e.target.name;
     const isChecked = e.target.checked;
-    checkedItems.set(item, isChecked)
-    setCheckedItems(checkedItems);
+    updateChecboxValue(item, isChecked)
   };
 
   return (
     <React.Fragment>
       <tbody>
-        <TodoListRow handleTableRowClick={handleTableRowClick} handleEdit={handleEdit} handleDelete={handleDelete} handleDone={handleDone} handleOnReOpen={handleOnReOpen} handleCheckChange={handleCheckChange} checkedItems={checkedItems} />
+        <TodoListRow handleTableRowClick={handleTableRowClick} handleEdit={handleEdit} handleDelete={handleDelete} handleDone={handleDone} handleOnReOpen={handleOnReOpen} handleCheckChange={handleCheckChange} />
         <div className="bulkopsdiv">
           <p>You can select multiple rows by clicking on checkbox and perform </p>
           <Button onClick={handleBulkDelete} name='Group Delete' class_='delete' />
@@ -193,7 +191,8 @@ const mapDispatchToProps = dispatch => {
     setFormToEdit: postId => dispatch(setFormToEdit(postId)),
     clearFormToEdit: postId => dispatch(clearFormToEdit(postId)),
     markBulkDone: postIds => dispatch(markBulkDone(postIds)),
-    markBulkPending: postIds => dispatch(markBulkPending(postIds))
+    markBulkPending: postIds => dispatch(markBulkPending(postIds)),
+    updateChecboxValue: (postId, isChecked) => dispatch(updateChecboxValue(postId, isChecked))
   };
 };
 

@@ -16,7 +16,7 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import Checkbox from '@material-ui/core/Checkbox';
 
-const TodoListRow = ({ todos, filterBy, handleTableRowClick, sort, handleEdit, handleDelete, handleDone, handleOnReOpen, handleCheckChange, checkedItems }) => {
+const TodoListRow = ({ todos, filterBy, handleTableRowClick, sort, handleEdit, handleDelete, handleDone, handleOnReOpen, handleCheckChange }) => {
   let filteredTodos = getFilteredList(todos, filterBy);
   
   if (sort.sortBy === "title") {
@@ -56,7 +56,7 @@ const TodoListRow = ({ todos, filterBy, handleTableRowClick, sort, handleEdit, h
       <td>
         <Checkbox
           name={todo.id}
-          checked={checkedItems.get(todo.id)}
+          checked={todo.checked}
           onChange={(e) => handleCheckChange(e)}
           inputProps={{ 'aria-label': 'primary checkbox' }}
         />

@@ -18,6 +18,7 @@ export const SET_FORM_TO_EDIT = "SET_FORM_TO_EDIT";
 export const CLEAR_FROM_TO_EDIT = "CLEAR_FROM_TO_EDIT";
 export const BULK_DONE = "BULK_DONE";
 export const BULK_PENDING = "BULK_PENDING";
+export const UPDATE_CHECKBOX = "UPDATE_CHECKBOX";
 
 
 const asyncImitator = (dispatch, action) => {
@@ -166,6 +167,17 @@ export const markBulkPending = payload => {
         const { isFetching } = getState();
         if (!isFetching) {
             asyncImitator(dispatch, { type: BULK_PENDING, payload });
+        }
+    };
+};
+
+
+export const updateChecboxValue = (id, ischecked) => {
+    console.log(id, ischecked);
+    return (dispatch, getState) => {
+        const { isFetching } = getState();
+        if (!isFetching) {
+            asyncImitator(dispatch, { type: UPDATE_CHECKBOX, payload: {id:id, ischecked:ischecked} });
         }
     };
 };

@@ -58,14 +58,13 @@ export const actionSort = (a, b) => {
   return t1 - t2;
 };
 
-
 // function to delete selected item from product list
-export const getSelectedRowsIds = (checkedItems) =>{
+export const getSelectedRowsIds = (todos) =>{
   let ids = [];
-  checkedItems.forEach((checked, id) => {
-      if (checked) {
-        ids.push(id);
-      }
-  });
+  todos.map((item) =>{
+    if(item.checked){
+      ids.push(item.id);
+    }
+  })
   return ids;
 }
