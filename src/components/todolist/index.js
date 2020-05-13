@@ -109,6 +109,7 @@ const TodoList = ({ todos, deleteTodo, reOpenTodo, markDone, setFormToEdit, clea
 
   };
   const handleCheckChange = (e) => {
+    console.log(e);
     const item = e.target.name;
     const isChecked = e.target.checked;
     updateChecboxValue(item, isChecked)
