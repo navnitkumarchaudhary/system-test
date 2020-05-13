@@ -1,0 +1,283 @@
+$primary-btn-background: #007bff;
+$primary-btn-color: #fff;
+$re-open: #17a2b8;
+$danger: #dc3545;
+$success: #28a745;
+$black: #000;
+$warning: #ffc107;
+$bg-color: #282c33;
+$primary-color: #007bff;
+$secondary-color: #fff;
+$stripe-color: #ddd;
+$bg-color: #282c33;
+$white: #fff;
+
+.App {
+  font-family: "Times New Roman", Times, serif;
+}
+
+// header
+
+.App-header {
+  background-color: #282c34;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+  height: 50px;
+
+  .search {
+    position: absolute;
+    display: flex;
+    left: 0;
+    text-align: center;
+    margin-left: 10px;
+    background: white;
+    outline: none;
+    height: 30px;
+    width: 240px;
+    border-radius: 10px;
+    border: 1px salmon solid;
+  }
+}
+
+// add todo 
+
+.add-todo {
+  position: absolute;
+  right: 5%;
+  bottom: 5%;
+
+  .todo-btn {
+    height: auto;
+    background-color: $success;
+    font-size: 2rem;
+    padding: 0.4rem 0.6em;
+    border-radius: 50%;
+    border: none;
+
+    &:hover {
+      background-color: darken($color: #28a777, $amount: 20%);
+    }
+  }
+}
+
+// list rows
+
+table {
+  width: 100%;
+  text-align: center;
+
+  th {
+    color: $black;
+    height: 2.5em;
+    cursor: pointer;
+  }
+
+  th,
+  td {
+    border-bottom: 1px solid $stripe-color;
+  }
+
+  td {
+    cursor: default;
+  }
+
+  tr {
+    height: 3.5rem;
+  }
+}
+
+.complete {
+  text-decoration: line-through;
+  background-color: $success;
+}
+
+// button
+
+button {
+  display: inline-block;
+  font-weight: 400;
+  text-align: center;
+  outline: none;
+  height: auto;
+  width: auto;
+  white-space: nowrap;
+  vertical-align: middle;
+  user-select: none;
+  border: 1px solid transparent;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  background-color: $primary-btn-background;
+  color: $primary-btn-color;
+  margin-right: 5px;
+  cursor: pointer;
+  margin: 0 6px;
+  height: 30px;
+
+  &:hover {
+    background-color: darken($color: $primary-btn-background, $amount: 20%);
+  }
+}
+
+.re-open {
+  background-color: $primary-color;
+  border-color: $primary-color;
+
+  &:hover {
+    background-color: darken($color: $re-open, $amount: 15%);
+  }
+}
+
+.delete,
+.cancel {
+  background-color: $danger;
+  border-color: $danger;
+
+  &:hover {
+    background-color: darken($color: $danger, $amount: 15%);
+  }
+}
+
+.done,
+.submit {
+  background-color: $success;
+  border-color: $success;
+
+  &:hover {
+    background-color: darken($color: $success, $amount: 15%);
+  }
+}
+
+.edit {
+  color: $white;
+  background-color: $warning;
+  border-color: $warning;
+
+  &:hover {
+    background-color: darken($color: $warning, $amount: 15%);
+  }
+}
+
+// modal
+
+/* The Modal (background) */
+.modal {
+  position: fixed;
+  z-index: 50;
+  background-color: white;
+  width: 100%;
+  height: auto;
+  box-sizing: border-box;
+  transition: all 0.3s ease-out;
+}
+
+.backdrop {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 20;
+  margin: 0;
+  padding: 0;
+  left: 0;
+  top: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+/* Modal Content Box */
+.modal-content {
+  background-color: #fefefe;
+  margin: 4% auto;
+  padding: 20px;
+  border-radius: 10px;
+  border: 1px solid #888;
+  overflow: auto;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+// form
+
+form {
+  width: 60%;
+  margin: 0 auto;
+  box-sizing: border-box;
+
+  .createdat {
+    display: flex;
+    justify-content: flex-start;
+    position: relative;
+    left: 19%;
+  }
+
+  .error {
+    color: red;
+    position: absolute;
+    font-size: 15px;
+  }
+
+  label span {
+    display: inline-block;
+    width: 120px;
+    text-align: center;
+  }
+
+  input,
+  select {
+    font: 1em sans-serif;
+    width: 250px;
+    border: 1px solid #999;
+  }
+
+  textarea {
+    font: 1em sans-serif;
+    width: 250px;
+    height: 100px;
+    border: 1px solid #999;
+  }
+
+  fieldset {
+    display: inline-block;
+    border: none;
+  }
+
+  .radio {
+    margin: 0;
+
+    input[type="radio"] {
+      width: 20px;
+    }
+
+    label {
+      span {
+        width: 70px;
+        text-align: left;
+      }
+    }
+  }
+}
+
+.bulkopsdiv {
+  position: absolute;
+  display: flex;
+  right: 0;
+  margin-top: 10px;
+  align-items: center;
+}
